@@ -78,32 +78,38 @@ public:
     return(0<=a-'0'&&a-'0'<10)? 1:0;
   }
 
+    struct node{
+        char op;
+        int key;
+    }
+
 int main(){
-  char express[MAX];
-  MyStack<long long> number;
-  MyStack<char>  op;
-  long long ans;
-  cin.getline(express);
-  char *p = express;
-  while (*p != 0)
-    {
-      if(ifNumber(*p))
-	{
-	  long num = 0;
-	  while (ifNumber(*p))
-	    {
-	      num *= 10;
-	      num += *p - '0';
-	      ++p;
-	    }
-	  number.add(num);
-	}
-      if(*p != ' ')
-	{
-	  op.add(*p);
-	}
-      if(*p == ' ')
-	++p;
-   }
-  
+    char input;
+    MyStack<char> charpool;
+    int p=0;
+    node a[ MAX ];
+    do{
+        cin >> input;
+        if(ifNumber( input )){
+            if(p>0 && !a[ p-1 ].op ){
+               a[ p-1 ].key *= 10;
+               a[ p-1 ].key += input - '0';
+            }
+            else{
+               a[ p ].op = 0;
+               a[ p ].key = input - '0';
+               ++p;
+           }
+        }
+        else if( p=='(' ) charpool.add( p );
+        else if( p==')' ){
+            while( charpool.search()!='(' ){
+                a[ p ] = charpool.search( );
+                ++p;
+                charpool.pop();
+            }
+            charpool.pop();
+        }
+    }
+    return 0;  
 }
