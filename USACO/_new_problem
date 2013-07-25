@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo 'Problem name: '
+read NAME
+echo '/*
+ID: frequen1
+PROG: '"$NAME"'
+LANG: C++
+*/
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <cstdio>
+#include <stack>
+#include <queue>
+#include <cmath>
+#include <cstdlib>
+
+using namespace std;
+
+const int MAX = 1<<30;
+
+ifstream fin ("'"$NAME.in"'");
+ofstream fout ("'"$NAME.out"'");
+
+
+int main(int argc, char *argv[])
+{
+
+  return 0;
+}
+' > "$NAME.cpp"
+touch "$NAME.in"
+emacs "$NAME.cpp"
