@@ -14,18 +14,17 @@ LANG: C++
 #include <cstdio>
 #include <stack>
 #include <queue>
+#include <set>
+#include <map>
 #include <cmath>
 #include <cstdlib>
+#include <ctime>
 #include <iomanip>
 #include <utility>
-
 using namespace std;
-
-const int MAX = 1<<30;
-
+const long oo = (1LL<<31)-1;
 ifstream fin ("'"$NAME.in"'");
 ofstream fout ("'"$NAME.out"'");
-
 
 int main(int argc, char *argv[])
 {
@@ -34,4 +33,4 @@ int main(int argc, char *argv[])
 }
 ' > "$NAME.cpp"
 touch "$NAME.in"
-emacs "$NAME.cpp"
+emacs "$NAME.cpp" "$NAME.in"
