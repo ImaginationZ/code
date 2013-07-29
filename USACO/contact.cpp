@@ -46,7 +46,7 @@ void count(int length){
   while(tmp--)
 	{
 	  sum <<= 1;
-	  sum += s[p] - '0';	 
+	  sum |= s[p] - '0';	 
 	  p++;
 	  if( p> s.size()) return;
 	}
@@ -57,7 +57,6 @@ void count(int length){
 	  sum |= s[p] - '0';
 	  f[length][sum]++;
 	  ++p;
-	  cout << p << endl;
 	  if(p > s.size()) return;
 	} 
 }
@@ -92,11 +91,12 @@ int main(int argc, char *argv[])
   for (int i = a; i <= b; ++i)
 	{
 	  for (int j = 0; j < (1<<i); ++j)
-		{
-		  res[idx].times = f[i][j];
-		  res[idx].length = i;
-		  res[idx++].bit = j;
-		}
+		  if ( f[i][j] > 0 )
+			{
+			  res[idx].times = f[i][j];
+			  res[idx].length = i;
+			  res[idx++].bit = j;
+			}
 	}
   sort(res,res+idx,cmp);
   int p = 0;
@@ -106,8 +106,15 @@ int main(int argc, char *argv[])
 	  if(!nth) break;
 	  fout << nth << endl;
 	  print(res[p].length,res[p].bit);
+	  int nage = 0;
 	  while ( res[++p].times == nth){
+		++nage;
+		if( nage % 6)
 		fout <<' ';
+		else {
+		  fout << endl;
+		  nage = 0;
+		}
 		print(res[p].length,res[p].bit);
 	  }
 	  n--;
